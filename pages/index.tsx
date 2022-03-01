@@ -1,39 +1,56 @@
 import { NextPage, GetStaticProps } from "next";
+import Link from "next/link";
 
-import {
-  getACFOptions,
-  getNewsItems,
-  getAgendaItems,
-  getPageBySlug,
-} from "lib/wp";
+import { getPathname } from "../lib/helpers";
+import { getOptions } from "../lib/requests";
 
-import Home, { PropsType as HomePropsType } from "components/templates/Home";
+type PropsType = {
+  menuItems: Array<{
+    menuItem: {
+      title: string;
+      url: string;
+    };
+  }>;
+};
 
-const Page: NextPage<HomePropsType> = (props): JSX.Element => (
-  <Home {...props} />
-);
+const Page: NextPage<PropsType> = (props): JSX.Element => {
+  return (
+    <>
+      <div
+        style={{
+          maxWidth: "1100px",
+          display: "flex",
+          justifyContent: "space-evenly",
+          margin: "auto",
+        }}
+      >
+        {props.menuItems.map(({ menuItem }) => (
+          <Link href={getPathname(menuItem.url)}>{menuItem.title}</Link>
+        ))}
+      </div>
+      <div
+        style={{
+          maxWidth: "1100px",
+          display: "flex",
+          justifyContent: "center",
+          margin: "50px auto",
+        }}
+      >
+        Template: Home
+      </div>
+    </>
+  );
+};
 
 export default Page;
 
-export const getStaticProps: GetStaticProps<HomePropsType> = async () => {
-  const page = await getPageBySlug("home");
-
-  const options = await getACFOptions();
-
-  const head = { title: page.yoast_title, meta: page.yoast_meta };
-
-  const newsItems = await getNewsItems("?per_page=2");
-  const agendaItems = await getAgendaItems("?per_page=2");
+export const getStaticProps: GetStaticProps<PropsType> = async () => {
+  const options = await getOptions();
 
   return {
     props: {
-      template: "Home",
-      head,
-      ...page.acf,
-      news: { ...page.acf.news, newsItems },
-      agenda: { ...page.acf.agenda, agendaItems },
-      options,
+      menuItems: options.acf.mainMenuitems,
     },
-    // revalidate: 30,
+    revalidate: 30,
   };
 };
