@@ -51,6 +51,6 @@ export const getStaticProps: GetStaticProps<PropsType> = async () => {
     props: {
       menuItems: options.acf.mainMenuitems,
     },
-    revalidate: 30,
+    revalidate: 5,
   };
 };

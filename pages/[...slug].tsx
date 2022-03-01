@@ -86,14 +86,14 @@ export const getStaticProps: GetStaticProps<PropsType> = async ({ params }) => {
     case "Contact.php": {
       return {
         props: { template: "Contact", menuItems: options.acf.mainMenuitems },
-        revalidate: 30,
+        revalidate: 5,
       };
     }
 
     case "OverOns.php": {
       return {
         props: { template: "OverOns", menuItems: options.acf.mainMenuitems },
-        revalidate: 30,
+        revalidate: 5,
       };
     }
 
@@ -103,21 +103,21 @@ export const getStaticProps: GetStaticProps<PropsType> = async ({ params }) => {
           template: "HulpBij",
           menuItems: options.acf.mainMenuitems,
         },
-        revalidate: 30,
+        revalidate: 5,
       };
     }
 
     case "Flexibel.php": {
       return {
         props: { template: "Flexibel", menuItems: options.acf.mainMenuitems },
-        revalidate: 30,
+        revalidate: 5,
       };
     }
 
     case "FormPage.php": {
       return {
         props: { template: "FormPage", menuItems: options.acf.mainMenuitems },
-        revalidate: 30,
+        revalidate: 5,
       };
     }
 
