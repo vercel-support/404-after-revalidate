@@ -24,6 +24,7 @@ const Page: NextPage<PropsType> = (props): JSX.Element => {
           margin: "auto",
         }}
       >
+        <Link href="/">Home</Link>
         {props.menuItems.map(({ menuItem }) => (
           <Link href={getPathname(menuItem.url)}>{menuItem.title}</Link>
         ))}
