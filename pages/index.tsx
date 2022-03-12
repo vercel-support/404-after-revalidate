@@ -46,7 +46,7 @@ export default Page;
 
 export const getStaticProps: GetStaticProps<PropsType> = async () => {
   const options = await getOptions();
-
+  console.log(options.acf.mainMenuitems)
   return {
     props: {
       menuItems: options.acf.mainMenuitems,
