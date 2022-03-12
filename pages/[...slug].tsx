@@ -72,8 +72,9 @@ export const getStaticProps: GetStaticProps<PropsType> = async ({ params }) => {
   const { slug } = params as IParams;
 
   let page = await getPageBySlug(slug[0]);
-
-  if (!page) return { notFound: true };
+  console.log("page:");
+  console.log(page);
+  // if (!page) return { notFound: true };
 
   if (slug.length > 1) {
     const pages = await getPagesByParentId(page.id);
